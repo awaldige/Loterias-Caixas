@@ -1,50 +1,65 @@
-# Resultados das Loterias
+Resultados das Loterias
+Projeto web simples para consulta dos resultados das principais loterias da Caixa Econômica Federal, incluindo Mega-Sena, Quina, Lotofácil, Dia de Sorte, Loteca, Dupla Sena, Lotomania, +Milionária, Super Sete e Timemania.
 
-Este é um projeto web simples que permite consultar os resultados de diversas loterias da Caixa Econômica Federal, como Mega-Sena, Quina, Lotofácil, Dia de Sorte, Loteca, Dupla Sena, Lotomania, +Milionária, Super Sete e Timemania.
+🚀 Funcionalidades Principais
+Interface Intuitiva: Cada loteria é exibida em um card separado, facilitando a navegação.
 
-## Funcionalidades
+Consulta Personalizada: Permite buscar resultados pelo número do concurso para cada modalidade.
 
-- **Interface Intuitiva:** Apresenta um card para cada modalidade de loteria.
-- **Consulta por Concurso:** Permite ao usuário digitar o número do concurso desejado para cada loteria.
-- **Exibição de Resultados:** Mostra a data da apuração e os números sorteados para a maioria das loterias.
-- **Informações Específicas:** Exibe informações adicionais como os trevos da sorte para a +Milionária e os resultados dos jogos para a Loteca.
-- **Tratamento de Erros:** Exibe mensagens de erro caso o concurso não seja encontrado ou a API esteja indisponível.
+Exibição Detalhada: Mostra data do sorteio e números sorteados.
 
-## Tecnologias Utilizadas
+Informações Extras:
 
-- **HTML:** Estrutura da página web.
-- **CSS:** Estilização da interface, incluindo layout responsivo com Grid.
-- **JavaScript:** Lógica para interagir com o usuário, fazer requisições à API e exibir os resultados dinamicamente.
-- **API:** Utiliza a API pública não oficial do Portal de Loterias da Caixa para buscar os resultados.
++Milionária exibe dezenas e trevos da sorte separadamente.
 
-## Como Executar o Projeto
+Loteca apresenta os resultados dos jogos individualmente.
 
-1.  **Clone o repositório (opcional):** Se este código estiver em um repositório Git, você pode cloná-lo para sua máquina local.
-    ```bash
-    git clone https://github.com/awaldige/Loterias-Caixas
-    ```
-2.  **Abra o arquivo `index.html`:** Navegue até a pasta onde o arquivo `index.html` está salvo e abra-o com seu navegador web preferido.
+Timemania mostra também o time do coração.
 
-## Estrutura de Arquivos
+Tratamento de Erros: Mensagens claras para concursos não encontrados ou problemas na API.
 
+🛠️ Tecnologias Utilizadas
+HTML5: Estrutura semântica e acessível da página.
+
+CSS3: Estilos modernos, responsivos e layout com CSS Grid.
+
+JavaScript (ES6+): Manipulação DOM, chamadas assíncronas à API e exibição dinâmica dos dados.
+
+API: Consumo da API pública não oficial do Portal de Loterias da Caixa para obtenção dos resultados.
+
+📂 Estrutura do Projeto
+bash
+Copiar
+Editar
 /
-├── index.html      # Arquivo HTML principal
-├── style.css       # Arquivo CSS para estilos
-└── script.js       # Arquivo JavaScript com a lógica da aplicação
+├── index.html      # Arquivo principal com a estrutura da página
+├── style.css       # Estilos e layout do site
+└── script.js       # Lógica de requisição e manipulação dos dados da API
+⚙️ Como Executar o Projeto
+Clone o repositório (opcional, caso esteja no GitHub):
 
+bash
+git clone https://github.com/awaldige/Loterias-Caixas.git
+Navegue até a pasta do projeto:
+cd Loterias-Caixas
+Abra o arquivo index.html com seu navegador favorito.
 
-## Notas
+📌 Observações Importantes
+A API utilizada é pública e não oficial, portanto, sua disponibilidade e formato dos dados podem mudar sem aviso.
 
-- Este projeto utiliza uma API pública não oficial. A disponibilidade e a estrutura dos dados podem mudar sem aviso prévio.
-- A funcionalidade e as informações exibidas podem variar dependendo da modalidade da loteria e da disponibilidade dos dados na API.
-- Para a Loteca, os resultados dos jogos são exibidos individualmente.
-- Para a +Milionária, as dezenas e os trevos da sorte são exibidos separadamente.
-- Para a Timemania, o time do coração também é exibido.
+Algumas loterias apresentam informações específicas, conforme mencionado nas funcionalidades.
 
-## Contribuição
+Resultados dependem da atualização da API; caso algum concurso recente não apareça, pode ser devido a essa limitação.
 
-Contribuições são bem-vindas! Sinta-se à vontade para reportar issues, sugerir melhorias ou enviar pull requests.
+🤝 Como Contribuir
+Contribuições são sempre bem-vindas! Você pode:
 
-## Autor
+Abrir issues para reportar bugs ou sugerir melhorias
 
-André Waldige ou (https://github.com/awaldige/Loterias-Caixas)
+Enviar pull requests com correções ou novas funcionalidades
+
+Compartilhar o projeto com outras pessoas interessadas
+
+🧑‍💻 Sobre o Autor
+André Waldige
+GitHub | Repositório do Projeto
