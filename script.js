@@ -6,7 +6,7 @@ const loterias = {
   loteca: { nome: "Loteca", imagem: "loteca.png" },
   duplasena: { nome: "Dupla Sena", imagem: "dupla-sena.png" },
   lotomania: { nome: "Lotomania", imagem: "lotomania.jpeg" },
-  maismilionaria: { nome: "+Milionária", imagem: "+milionária.png" },
+  maismilionaria: { nome: "+Milionária", imagem: "mais-milionaria.png" },
   supersete: { nome: "Super Sete", imagem: "super-sete.png" },
   timemania: { nome: "Timemania", imagem: "timemania.jpeg" }
 };
