@@ -1,7 +1,7 @@
 const loterias = {
   megasena: { nome: "Mega-Sena", imagem: "mega-sena.png" },
   quina: { nome: "Quina", imagem: "quina.png" },
-  lotofacil: { nome: "Lotofácil", imagem: "lotofácil.jpeg" },
+  lotofacil: { nome: "Lotofácil", imagem: "Lotofácil.jpeg" },
   diadesorte: { nome: "Dia de Sorte", imagem: "dia-de-sorte.jpeg" },
   loteca: { nome: "Loteca", imagem: "loteca.png" },
   duplasena: { nome: "Dupla Sena", imagem: "dupla-sena.png" },
