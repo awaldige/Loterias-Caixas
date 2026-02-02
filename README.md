@@ -1,65 +1,110 @@
-Resultados das Loterias
-Projeto web simples para consulta dos resultados das principais loterias da Caixa Econômica Federal, incluindo Mega-Sena, Quina, Lotofácil, Dia de Sorte, Loteca, Dupla Sena, Lotomania, +Milionária, Super Sete e Timemania.
+🎲 Resultados das Loterias
 
-🚀 Funcionalidades Principais
-Interface Intuitiva: Cada loteria é exibida em um card separado, facilitando a navegação.
+Aplicação web para consulta dos resultados das principais loterias da Caixa Econômica Federal, permitindo pesquisar concursos e visualizar números sorteados de forma simples e organizada.
 
-Consulta Personalizada: Permite buscar resultados pelo número do concurso para cada modalidade.
+O projeto foi desenvolvido com foco em simplicidade, desempenho e boa experiência do usuário, sendo ideal para uso direto no navegador.
 
-Exibição Detalhada: Mostra data do sorteio e números sorteados.
+🚀 Funcionalidades
 
-Informações Extras:
+🎯 Interface organizada em cards por modalidade
 
-+Milionária exibe dezenas e trevos da sorte separadamente.
+🔎 Consulta de resultados por número do concurso
 
-Loteca apresenta os resultados dos jogos individualmente.
+📅 Exibição da data do sorteio
 
-Timemania mostra também o time do coração.
+🔢 Números sorteados organizados por modalidade
 
-Tratamento de Erros: Mensagens claras para concursos não encontrados ou problemas na API.
+📊 Informações específicas para algumas loterias:
+
++Milionária → dezenas e trevos da sorte
+
+Loteca → resultados individuais dos jogos
+
+Timemania → time do coração
+
+⚠️ Tratamento de erros quando concurso não é encontrado
+
+📱 Layout responsivo para desktop e mobile
 
 🛠️ Tecnologias Utilizadas
-HTML5: Estrutura semântica e acessível da página.
 
-CSS3: Estilos modernos, responsivos e layout com CSS Grid.
+HTML5 — estrutura semântica
 
-JavaScript (ES6+): Manipulação DOM, chamadas assíncronas à API e exibição dinâmica dos dados.
+CSS3 — layout responsivo com Grid e Flexbox
 
-API: Consumo da API pública não oficial do Portal de Loterias da Caixa para obtenção dos resultados.
+JavaScript (ES6+) — manipulação do DOM e requisições assíncronas
+
+API pública não oficial de resultados das loterias
 
 📂 Estrutura do Projeto
-bash
-Copiar
-Editar
 /
-├── index.html      # Arquivo principal com a estrutura da página
-├── style.css       # Estilos e layout do site
-└── script.js       # Lógica de requisição e manipulação dos dados da API
-⚙️ Como Executar o Projeto
-Clone o repositório (opcional, caso esteja no GitHub):
+├── index.html      # Estrutura da página
+├── style.css       # Estilos e layout
+└── script.js       # Lógica e consumo da API
 
-bash
+🌐 Acesse o Projeto Online
+
+🔗 https://loterias-caixas.vercel.app/
+
+📸 Prévia
+
+![IMG_1329](https://github.com/user-attachments/assets/160a7b04-eafb-469e-88e9-bc2c3821b583)
+![IMG_1330](https://github.com/user-attachments/assets/5bffed0d-db26-45ad-9f5d-04342fd08762)
+![IMG_1331](https://github.com/user-attachments/assets/49316276-c3aa-431a-aea9-6c6d7c158cdb)
+![IMG_1332](https://github.com/user-attachments/assets/81db3a83-5a2e-4664-8a45-e4fadce47c06)
+
+
+
+▶️ Como Executar Localmente
+
+Clone o repositório:
+
 git clone https://github.com/awaldige/Loterias-Caixas.git
-Navegue até a pasta do projeto:
+
+
+Entre na pasta do projeto:
+
 cd Loterias-Caixas
-Abra o arquivo index.html com seu navegador favorito.
 
-📌 Observações Importantes
-A API utilizada é pública e não oficial, portanto, sua disponibilidade e formato dos dados podem mudar sem aviso.
 
-Algumas loterias apresentam informações específicas, conforme mencionado nas funcionalidades.
+Abra o arquivo index.html no navegador.
 
-Resultados dependem da atualização da API; caso algum concurso recente não apareça, pode ser devido a essa limitação.
+Não é necessário backend ou servidor.
 
-🤝 Como Contribuir
-Contribuições são sempre bem-vindas! Você pode:
+📌 Observações
 
-Abrir issues para reportar bugs ou sugerir melhorias
+A API utilizada é pública e não oficial, podendo sofrer alterações ou instabilidades.
 
-Enviar pull requests com correções ou novas funcionalidades
+Alguns concursos podem não aparecer imediatamente caso a API ainda não tenha sido atualizada.
 
-Compartilhar o projeto com outras pessoas interessadas
+🔮 Melhorias Futuras
 
-🧑‍💻 Sobre o Autor
-André Waldige
-GitHub | Repositório do Projeto
+Possíveis evoluções do projeto:
+
+Consulta automática do último concurso
+
+Histórico de concursos
+
+Favoritar modalidades
+
+Notificações de novos resultados
+
+Modo escuro
+
+Progressive Web App (PWA)
+
+🤝 Contribuições
+
+Sugestões e melhorias são bem-vindas:
+
+Abrir issues para bugs ou sugestões
+
+Enviar pull requests
+
+Compartilhar o projeto
+
+👨‍💻 Autor
+
+Desenvolvido por André Waldige
+
+GitHub: https://github.com/awaldige
