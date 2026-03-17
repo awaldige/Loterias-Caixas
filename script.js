@@ -1,5 +1,5 @@
 // ========================
-// CONFIGURAÇÃO LOTERIAS
+// CONFIG
 // ========================
 const loterias = {
   megasena: { nome: "Mega-Sena", imagem: "mega-sena.png" },
@@ -14,11 +14,11 @@ const loterias = {
   timemania: { nome: "Timemania", imagem: "timemania.jpeg" }
 };
 
+const container = document.getElementById("cards-container");
+
 // ========================
 // CRIAR CARDS
 // ========================
-const container = document.getElementById("cards-container");
-
 for (const [key, { nome, imagem }] of Object.entries(loterias)) {
   const card = document.createElement("div");
   card.className = "card";
@@ -27,10 +27,13 @@ for (const [key, { nome, imagem }] of Object.entries(loterias)) {
     <img src="${imagem}" alt="${nome}">
     <h2>${nome}</h2>
 
-    <label for="concurso-${key}">Concurso:</label>
-    <input type="number" id="concurso-${key}" placeholder="Digite nº" min="1">
+    <input type="number" id="concurso-${key}" placeholder="Digite nº">
 
-    <button onclick="consultarLoteria('${key}')">Consultar</button>
+    <div class="botoes">
+      <button onclick="consultarLoteria('${key}')">Consultar</button>
+      <button onclick="ultimoResultado('${key}')">Último</button>
+      <button class="limpar" onclick="limparConsulta('${key}')">Limpar</button>
+    </div>
 
     <div class="resultado" id="resultado-${key}"></div>
   `;
@@ -39,166 +42,200 @@ for (const [key, { nome, imagem }] of Object.entries(loterias)) {
 }
 
 // ========================
-// CONSULTAR LOTERIA
+// LOADING
 // ========================
-async function consultarLoteria(tipo) {
-  const resultadoDiv = document.getElementById(`resultado-${tipo}`);
-  const numero = document.getElementById(`concurso-${tipo}`).value;
+function loading(el) {
+  el.innerHTML = `<div class="loader"></div>`;
+}
 
-  if (!numero) {
-    resultadoDiv.textContent = "Informe um número.";
-    return;
-  }
+// ========================
+// LIMPAR
+// ========================
+function limparConsulta(tipo) {
+  document.getElementById(`concurso-${tipo}`).value = "";
+  document.getElementById(`resultado-${tipo}`).innerHTML = "";
+  localStorage.removeItem(`ultimo-${tipo}`);
+}
 
-  resultadoDiv.innerHTML = "Carregando...";
+// ========================
+// ÚLTIMO RESULTADO
+// ========================
+async function ultimoResultado(tipo) {
+  const div = document.getElementById(`resultado-${tipo}`);
+  loading(div);
 
   try {
-    const url = `https://servicebus2.caixa.gov.br/portaldeloterias/api/${tipo}/${numero}`;
-    const res = await fetch(url);
-
-    if (!res.ok) throw new Error("Concurso não encontrado.");
-
+    const res = await fetch(`https://servicebus2.caixa.gov.br/portaldeloterias/api/${tipo}`);
     const data = await res.json();
 
-    let html = `<strong>Data:</strong> ${data.dataApuracao || "n/d"}<br>`;
+    mostrarResultado(tipo, data);
 
-    // ========================
-    // LOTECA (VERSÃO DEFINITIVA)
-    // ========================
-    if (tipo === "loteca") {
+    document.getElementById(`concurso-${tipo}`).value = data.numero;
+    localStorage.setItem(`ultimo-${tipo}`, data.numero);
 
-      const jogos = data.listaResultadoEquipeEsportiva;
-
-      if (jogos && jogos.length > 0) {
-
-        jogos.forEach((j, i) => {
-
-          console.log("DEBUG LOTECA:", j);
-
-          const time1 = j.nomeEquipeUm || j.nomeEquipeMandante || "Time 1";
-          const time2 = j.nomeEquipeDois || j.nomeEquipeVisitante || "Time 2";
-
-          let resultado = "";
-
-          // ========================
-          // 1. PLACAR DIRETO
-          // ========================
-          const g1 =
-            j.qtGolsEquipeUm ??
-            j.placarEquipeUm ??
-            j.nuGolEquipeUm;
-
-          const g2 =
-            j.qtGolsEquipeDois ??
-            j.placarEquipeDois ??
-            j.nuGolEquipeDois;
-
-          if (
-            g1 !== undefined && g2 !== undefined &&
-            g1 !== null && g2 !== null &&
-            String(g1) !== "" && String(g2) !== ""
-          ) {
-            resultado = `<strong>${g1} x ${g2}</strong>`;
-          }
-
-          // ========================
-          // 2. COLUNAS (1 X 2)
-          // ========================
-          else if (
-            j.icColunaUm ||
-            j.icColunaMeio ||
-            j.icColunaDois
-          ) {
-            const c1 = j.icColunaUm ? "<b>1</b>" : "1";
-            const cE = j.icColunaMeio ? "<b>X</b>" : "X";
-            const c2 = j.icColunaDois ? "<b>2</b>" : "2";
-
-            resultado = `${c1} | ${cE} | ${c2}`;
-          }
-
-          // ========================
-          // 3. RESULTADO TEXTO
-          // ========================
-          else if (j.descResultado && j.descResultado.trim() !== "") {
-            resultado = `<strong>${j.descResultado}</strong>`;
-          }
-
-          else if (j.resultado && j.resultado.trim() !== "") {
-            resultado = `<strong>${j.resultado}</strong>`;
-          }
-
-          else if (j.sgResultado && j.sgResultado.trim() !== "") {
-            resultado = `<strong>${j.sgResultado}</strong>`;
-          }
-
-          // ========================
-          // 4. FALLBACK FINAL
-          // ========================
-          else {
-            resultado = "<em>Resultado não disponível</em>";
-          }
-
-          html += `
-            <div style="margin-bottom:10px">
-              <strong>Jogo ${i + 1}:</strong><br>
-              ${time1} ${resultado} ${time2}
-              <br><small>${j.nomeCampeonato || ""}</small>
-            </div>
-            <hr style="border:0;border-top:1px solid #eee;">
-          `;
-        });
-
-      } else {
-        html += "Nenhum jogo encontrado para este concurso.";
-      }
-    }
-
-    // ========================
-    // OUTRAS LOTERIAS
-    // ========================
-    else {
-
-      const dezenas =
-        data.listaDezenas ||
-        data.dezenasSorteadasOrdemSorteio ||
-        [];
-
-      html += `<strong>Números:</strong> ${dezenas.join(" - ")}`;
-
-      // +Milionária
-      if (tipo === "maismilionaria") {
-        const trevos =
-          data.listaTrevos ||
-          data.listaDezenasSegundoSorteio ||
-          (data.trevosSorteados ? [data.trevosSorteados] : []);
-
-        if (trevos.length > 0) {
-          html += `<br><b style="color:#d4af37">Trevos: ${trevos.join(" - ")}</b>`;
-        }
-      }
-
-      // Timemania / Dia de Sorte
-      if (tipo === "timemania" || tipo === "diadesorte") {
-        html += `<br><strong>Extra:</strong> ${data.nomeTimeCoracaoMesSorte || "n/d"}`;
-      }
-
-      // Dupla Sena
-      if (tipo === "duplasena" && data.listaDezenasSegundoSorteio) {
-        html += `<br><strong>2º Sorteio:</strong> ${data.listaDezenasSegundoSorteio.join(" - ")}`;
-      }
-    }
-
-    resultadoDiv.innerHTML = html;
-
-  } catch (e) {
-    resultadoDiv.innerHTML = `<span style="color:red">Erro na API da Caixa: ${e.message}</span>`;
-    console.error("Erro completo:", e);
+  } catch {
+    div.innerHTML = "Erro ao buscar último";
   }
 }
 
 // ========================
-// TEMA DARK
+// CONSULTAR
 // ========================
-document.getElementById("toggle-tema").onclick = () => {
-  document.body.classList.toggle("dark");
-};
+async function consultarLoteria(tipo) {
+  const numero = document.getElementById(`concurso-${tipo}`).value;
+  const div = document.getElementById(`resultado-${tipo}`);
+
+  if (!numero) {
+    div.innerHTML = "Digite um número";
+    return;
+  }
+
+  loading(div);
+
+  try {
+    const res = await fetch(`https://servicebus2.caixa.gov.br/portaldeloterias/api/${tipo}/${numero}`);
+    const data = await res.json();
+
+    mostrarResultado(tipo, data);
+
+    localStorage.setItem(`ultimo-${tipo}`, numero);
+
+  } catch {
+    div.innerHTML = "Erro na consulta";
+  }
+}
+
+// ========================
+// RESULTADO
+// ========================
+function mostrarResultado(tipo, data) {
+  const div = document.getElementById(`resultado-${tipo}`);
+
+  let html = `
+    <div class="info">
+      <span>Concurso ${data.numero}</span>
+      <span>${data.dataApuracao || ""}</span>
+    </div>
+  `;
+
+  // ========================
+  // LOTECA (CORRIGIDA)
+  // ========================
+  if (tipo === "loteca") {
+    const jogos = data.listaResultadoEquipeEsportiva || [];
+
+    html += `<div class="loteca-container">`;
+
+    jogos.forEach(j => {
+      const t1 = j.nomeEquipeUm || j.nomeEquipeMandante || "Time 1";
+      const t2 = j.nomeEquipeDois || j.nomeEquipeVisitante || "Time 2";
+
+      const g1 =
+        j.qtGolsEquipeUm ??
+        j.placarEquipeUm ??
+        j.nuGolEquipeUm ??
+        j.golsEquipeUm;
+
+      const g2 =
+        j.qtGolsEquipeDois ??
+        j.placarEquipeDois ??
+        j.nuGolEquipeDois ??
+        j.golsEquipeDois;
+
+      let meio = "";
+
+      if (
+        g1 !== undefined && g1 !== null && g1 !== "" &&
+        g2 !== undefined && g2 !== null && g2 !== ""
+      ) {
+        meio = `<div class="placar-badge">${g1} x ${g2}</div>`;
+      } else if (j.icColunaUm || j.icColunaMeio || j.icColunaDois) {
+        meio = `
+          <div class="colunas">
+            <span class="${j.icColunaUm ? "ativo" : ""}">1</span>
+            <span class="${j.icColunaMeio ? "ativo" : ""}">X</span>
+            <span class="${j.icColunaDois ? "ativo" : ""}">2</span>
+          </div>
+        `;
+      } else {
+        meio = `<div class="sem-resultado">-</div>`;
+      }
+
+      html += `
+        <div class="jogo-card">
+          <div class="jogo-times">
+            <span class="time">${t1}</span>
+            ${meio}
+            <span class="time">${t2}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  // ========================
+  // OUTRAS LOTERIAS
+  // ========================
+  else {
+    const dezenas =
+      data.listaDezenas ||
+      data.dezenasSorteadasOrdemSorteio ||
+      [];
+
+    html += `<div class="numeros">`;
+    dezenas.forEach(n => html += `<span>${n}</span>`);
+    html += `</div>`;
+
+    // +Milionária (trevos com espaçamento correto)
+    if (tipo === "maismilionaria") {
+      const trevos =
+        data.listaTrevos ||
+        data.trevosSorteados ||
+        [];
+
+      html += `<div class="trevos">`;
+      trevos.forEach(t => html += `<span>${t}</span>`);
+      html += `</div>`;
+    }
+
+    // extras
+    if (tipo === "timemania" || tipo === "diadesorte") {
+      html += `<div class="extra">Extra: ${data.nomeTimeCoracaoMesSorte || "n/d"}</div>`;
+    }
+  }
+
+  div.innerHTML = html;
+}
+
+// ========================
+// TEMA
+// ========================
+const botaoTema = document.getElementById("toggle-tema");
+
+function aplicarTema(t) {
+  document.body.classList.toggle("dark", t === "dark");
+}
+
+const temaSalvo = localStorage.getItem("tema") || "light";
+aplicarTema(temaSalvo);
+
+botaoTema?.addEventListener("click", () => {
+  const novo = document.body.classList.contains("dark") ? "light" : "dark";
+  aplicarTema(novo);
+  localStorage.setItem("tema", novo);
+});
+
+// ========================
+// ENTER
+// ========================
+document.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
+    const ativo = document.activeElement;
+    if (ativo && ativo.id.includes("concurso-")) {
+      const tipo = ativo.id.replace("concurso-", "");
+      consultarLoteria(tipo);
+    }
+  }
+});
