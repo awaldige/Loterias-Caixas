@@ -48,9 +48,10 @@ API pública não oficial de resultados das loterias
 
 📸 Prévia
 
-![IMG_2079](https://github.com/user-attachments/assets/ddbaabe7-30f0-49c1-a03d-b66b448c7dd5)
-![IMG_2077](https://github.com/user-attachments/assets/b627e94a-e673-49a8-b9f8-30957930cc71)
-![IMG_2076](https://github.com/user-attachments/assets/f049fc34-7794-45cc-93b1-8118bff691b0)
+![Captura de tela 2026-04-03 192734](https://github.com/user-attachments/assets/9faa5006-6e55-41ed-ad6c-37e503ce2eec)
+![Captura de tela 2026-04-03 193026](https://github.com/user-attachments/assets/409a6153-963b-479f-b458-88da4d9aa313)
+![Captura de tela 2026-04-03 192856](https://github.com/user-attachments/assets/09a320e5-09a5-4b88-bce1-fc50f781444e)
+![Captura de tela 2026-04-03 192756](https://github.com/user-attachments/assets/51215ed8-97b7-416a-a28c-dc21c459a34f)
 
 
 ▶️ Como Executar Localmente
