@@ -4,7 +4,7 @@ Aplicação web para consulta dos resultados das principais loterias da Caixa Ec
 
 O projeto foi desenvolvido com foco em simplicidade, desempenho e boa experiência do usuário, sendo ideal para uso direto no navegador.
 
-##🚀 Funcionalidades
+## 🚀 Funcionalidades
 
 - 🎯 Interface organizada em cards por modalidade
 
