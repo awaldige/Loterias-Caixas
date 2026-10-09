@@ -1,52 +1,52 @@
-🎲 Resultados das Loterias
+# 🎲 Resultados das Loterias
 
 Aplicação web para consulta dos resultados das principais loterias da Caixa Econômica Federal, permitindo pesquisar concursos e visualizar números sorteados de forma simples e organizada.
 
 O projeto foi desenvolvido com foco em simplicidade, desempenho e boa experiência do usuário, sendo ideal para uso direto no navegador.
 
-🚀 Funcionalidades
+##🚀 Funcionalidades
 
-🎯 Interface organizada em cards por modalidade
+- 🎯 Interface organizada em cards por modalidade
 
-🔎 Consulta de resultados por número do concurso
+- 🔎 Consulta de resultados por número do concurso
 
-📅 Exibição da data do sorteio
+- 📅 Exibição da data do sorteio
 
-🔢 Números sorteados organizados por modalidade
+- 🔢 Números sorteados organizados por modalidade
 
-📊 Informações específicas para algumas loterias:
+- 📊 Informações específicas para algumas loterias:
 
-+Milionária → dezenas e trevos da sorte
+- +Milionária → dezenas e trevos da sorte
 
-Loteca → resultados individuais dos jogos
+- Loteca → resultados individuais dos jogos
 
-Timemania → time do coração
+- Timemania → time do coração
 
-⚠️ Tratamento de erros quando concurso não é encontrado
+- ⚠️ Tratamento de erros quando concurso não é encontrado
 
-📱 Layout responsivo para desktop e mobile
+- 📱 Layout responsivo para desktop e mobile
 
-🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
-HTML5 — estrutura semântica
+- HTML5 — estrutura semântica
 
-CSS3 — layout responsivo com Grid e Flexbox
+- CSS3 — layout responsivo com Grid e Flexbox
 
-JavaScript (ES6+) — manipulação do DOM e requisições assíncronas
+- JavaScript (ES6+) — manipulação do DOM e requisições assíncronas
 
-API pública não oficial de resultados das loterias
+- API pública não oficial de resultados das loterias
 
-📂 Estrutura do Projeto
+## 📂 Estrutura do Projeto
 /
 ├── index.html      # Estrutura da página
 ├── style.css       # Estilos e layout
 └── script.js       # Lógica e consumo da API
 
-🌐 Acesse o Projeto Online
+## 🌐 Acesse o Projeto Online
 
-🔗 https://loterias-caixas.vercel.app/
+## 🔗 https://loterias-caixas.vercel.app/
 
-📸 Prévia
+## 📸 Prévia
 
 ![Captura de tela 2026-04-03 192734](https://github.com/user-attachments/assets/9faa5006-6e55-41ed-ad6c-37e503ce2eec)
 ![Captura de tela 2026-04-03 193026](https://github.com/user-attachments/assets/409a6153-963b-479f-b458-88da4d9aa313)
@@ -54,7 +54,7 @@ API pública não oficial de resultados das loterias
 ![Captura de tela 2026-04-03 192756](https://github.com/user-attachments/assets/51215ed8-97b7-416a-a28c-dc21c459a34f)
 
 
-▶️ Como Executar Localmente
+## ▶️ Como Executar Localmente
 
 Clone o repositório:
 
@@ -70,29 +70,27 @@ Abra o arquivo index.html no navegador.
 
 Não é necessário backend ou servidor.
 
-📌 Observações
+## 📌 Observações
 
 A API utilizada é pública e não oficial, podendo sofrer alterações ou instabilidades.
 
 Alguns concursos podem não aparecer imediatamente caso a API ainda não tenha sido atualizada.
 
-🔮 Melhorias Futuras
+## 🔮 Melhorias Futuras
 
 Possíveis evoluções do projeto:
 
-Consulta automática do último concurso
+- Consulta automática do último concurso
 
-Histórico de concursos
+- Histórico de concursos
 
-Favoritar modalidades
+- Favoritar modalidades
 
-Notificações de novos resultados
+- Notificações de novos resultados
 
-Modo escuro
+- Progressive Web App (PWA)
 
-Progressive Web App (PWA)
-
-🤝 Contribuições
+## 🤝 Contribuições
 
 Sugestões e melhorias são bem-vindas:
 
@@ -102,7 +100,7 @@ Enviar pull requests
 
 Compartilhar o projeto
 
-👨‍💻 Autor
+## 👨‍💻 Autor
 
 Desenvolvido por André Waldige
 
