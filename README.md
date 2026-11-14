@@ -73,13 +73,9 @@ https://loterias-caixas.vercel.app/
 
 ## 📸 Prévia do projeto
 
-![Captura de tela 2026-04-03 192734](https://github.com/user-attachments/assets/9faa5006-6e55-41ed-ad6c-37e503ce2eec)
+<img width="1351" height="768" alt="escuro" src="https://github.com/user-attachments/assets/48f06e83-d9c6-42cc-8bcb-3e29fa6be917" />
+<img width="1348" height="768" alt="loteria caixa" src="https://github.com/user-attachments/assets/97213f74-18e6-479c-944b-cb5b52fc8f74" />
 
-![Captura de tela 2026-04-03 193026](https://github.com/user-attachments/assets/409a6153-963b-479f-b458-88da4d9aa313)
-
-![Captura de tela 2026-04-03 192856](https://github.com/user-attachments/assets/09a320e5-09a5-4b88-bce1-fc50f781444e)
-
-![Captura de tela 2026-04-03 192756](https://github.com/user-attachments/assets/51215ed8-97b7-416a-a28c-dc21c459a34f)
 
 ## ▶️ Como executar localmente
 
