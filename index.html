@@ -1,22 +1,163 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resultados das Loterias</title>
-  
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='80'%3E🍀%3C/text%3E%3C/svg%3E">
-  
-  <meta name="description" content="Confira os resultados das principais loterias em tempo real.">
-  
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>Resultados das Loterias</h1>
-    <button id="toggle-tema">🌙 Tema</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div id="cards-container"></div>
-  <script src="script.js" defer></script>
+    <title>Loterias-Caixas | Resultados e Consultas</title>
+
+    <meta
+        name="description"
+        content="Consulte resultados das principais loterias, acompanhe concursos e confira números sorteados."
+    >
+
+    <meta name="theme-color" content="#092F35">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="header" id="inicio">
+        <div class="container header-content">
+
+            <a href="#inicio" class="logo" aria-label="Loterias-Caixas - início">
+                <span class="logo-icon">🍀</span>
+                <span class="logo-text">
+                    LOTERIAS<span>-CAIXAS</span>
+                    <small>RESULTADOS E CONSULTAS</small>
+                </span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a href="#inicio">Início</a>
+                <a href="#loterias">Loterias</a>
+                <a href="#sobre">Sobre</a>
+            </nav>
+
+            <button
+                type="button"
+                id="toggle-tema"
+                class="theme-toggle"
+                aria-label="Alternar tema"
+                aria-pressed="false"
+            >
+                <span class="theme-icon">🌙</span>
+                <span class="theme-label">Tema escuro</span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+
+        <!-- APRESENTAÇÃO -->
+        <section class="hero">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+                    <span class="section-tag">🍀 SUA CENTRAL DE RESULTADOS</span>
+
+                    <h1>
+                        Confira os resultados das
+                        <span>loterias</span>
+                    </h1>
+
+                    <p>
+                        Consulte os últimos concursos, pesquise resultados
+                        anteriores e acompanhe os números sorteados em
+                        um só lugar.
+                    </p>
+
+                    <a href="#loterias" class="btn-primary">
+                        Consultar resultados
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <div class="hero-highlight" aria-hidden="true">
+                    <div class="highlight-circle">
+                        <span>🍀</span>
+                    </div>
+                    <div class="highlight-decoration"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LOTERIAS -->
+        <section class="loterias-section" id="loterias">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="section-tag">CONSULTAS</span>
+                        <h2>Escolha sua loteria</h2>
+                        <p>
+                            Selecione uma modalidade para consultar
+                            os resultados dos concursos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cards-container" id="cards-container">
+                    <!-- Cards gerados pelo JavaScript -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SOBRE -->
+        <section class="about-section" id="sobre">
+            <div class="container about-content">
+
+                <div>
+                    <span class="section-tag">SOBRE O PROJETO</span>
+                    <h2>Informação de forma simples e organizada.</h2>
+                </div>
+
+                <p>
+                   <p>
+    O Loterias-Caixas é um projeto demonstrativo desenvolvido
+    para fins educacionais e de portfólio, com o objetivo de
+    apresentar consultas de resultados de diferentes modalidades
+    de loteria por meio de tecnologias web.
+    <br><br>
+    As informações são obtidas por meio de uma API externa e
+    dependem da disponibilidade do serviço consultado.
+</p>
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="container footer-content">
+
+            <a href="#inicio" class="footer-logo">
+                🍀 LOTERIAS-CAIXAS
+            </a>
+
+            <p>
+                Projeto independente, sem vínculo oficial com a
+                Caixa Econômica Federal.
+            </p>
+
+            <span>
+                Desenvolvido por André Waldige · AW TECHNOLOGY
+            </span>
+
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+
 </body>
 </html>
