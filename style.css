@@ -1,327 +1,840 @@
-/* ========================
-   RESET
-======================== */
+
+/* ========================================
+   LOTERIAS-CAIXAS
+   Identidade: Verde Esmeralda + Azul Petróleo
+======================================== */
+
+/* RESET */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* ========================
-   BASE
-======================== */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f1f5f9;
-  color: #1f2937;
-  padding: 20px;
-  transition: 0.3s;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f0fdf4;
+    color: #183b38;
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+/* ========================================
+   TEMA CLARO E ESCURO
+======================================== */
+
+:root {
+    --primary: #075e54;
+    --primary-dark: #092f35;
+    --accent: #10b981;
+    --accent-light: #d1fae5;
+    --background: #f0fdf4;
+    --surface: #ffffff;
+    --surface-secondary: #ecfdf5;
+    --text: #183b38;
+    --text-secondary: #64748b;
+    --border: #dbece4;
+    --shadow: 0 10px 30px rgba(9, 47, 53, 0.07);
+    --header-bg: rgba(255, 255, 255, 0.94);
 }
 
 body.dark {
-  background: #0f172a;
-  color: #e5e7eb;
+    --primary: #10b981;
+    --primary-dark: #092f35;
+    --accent: #34d399;
+    --accent-light: #164e42;
+    --background: #092f35;
+    --surface: #123d40;
+    --surface-secondary: #17494a;
+    --text: #ecfdf5;
+    --text-secondary: #a7c5bd;
+    --border: #28565a;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    --header-bg: rgba(9, 47, 53, 0.95);
 }
 
-/* ========================
-   BOTÃO TEMA
-======================== */
-#toggle-tema {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  background: #111827;
-  color: white;
-  cursor: pointer;
-  z-index: 1000;
+body {
+    background: var(--background);
+    color: var(--text);
 }
 
-body.dark #toggle-tema {
-  background: #e5e7eb;
-  color: #111827;
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--header-bg);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
 }
 
-/* ========================
-   GRID
-======================== */
-#cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+.header-content {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
 }
 
-/* ========================
-   CARD
-======================== */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 34px;
+}
+
+.logo-text {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.logo-text > span {
+    color: var(--accent);
+}
+
+.logo-text small {
+    display: block;
+    margin-top: 5px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.7px;
+    color: var(--text-secondary);
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   APRESENTAÇÃO
+======================================== */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 0;
+    background:
+        radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.18), transparent 30%),
+        linear-gradient(120deg, #092f35, #075e54);
+    color: #ffffff;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.hero-text {
+    max-width: 660px;
+}
+
+.section-tag {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero .section-tag {
+    color: #6ee7b7;
+}
+
+.hero h1 {
+    max-width: 650px;
+    margin-bottom: 20px;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+}
+
+.hero h1 span {
+    color: #6ee7b7;
+}
+
+.hero p {
+    max-width: 560px;
+    margin-bottom: 30px;
+    color: #d1fae5;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border-radius: 10px;
+    background: #10b981;
+    color: #052e2b;
+    font-size: 14px;
+    font-weight: 800;
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #6ee7b7;
+    transform: translateY(-2px);
+}
+
+.btn-primary span {
+    font-size: 20px;
+}
+
+/* DESTAQUE VISUAL */
+
+.hero-highlight {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+}
+
+.highlight-circle {
+    position: relative;
+    z-index: 2;
+    width: 185px;
+    height: 185px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 70px rgba(16, 185, 129, 0.2);
+}
+
+.highlight-circle span {
+    font-size: 100px;
+}
+
+.highlight-decoration {
+    position: absolute;
+    inset: 0;
+    border: 1px dashed rgba(110, 231, 183, 0.35);
+    border-radius: 50%;
+    animation: rotate 25s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   SEÇÃO DE LOTERIAS
+======================================== */
+
+.loterias-section {
+    padding: 75px 0;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.section-heading h2,
+.about-section h2 {
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: clamp(26px, 4vw, 34px);
+    letter-spacing: -1px;
+}
+
+.section-heading p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ========================================
+   GRID DE CARDS
+======================================== */
+
+#cards-container,
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+/* ========================================
+   CARD DA LOTERIA
+======================================== */
+
 .card {
-  background: white;
-  padding: 18px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  transition: 0.25s;
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+    transform: translateY(-4px);
+    border-color: var(--accent);
 }
 
-body.dark .card {
-  background: #1e293b;
-}
-
-/* ========================
-   HEADER CARD
-======================== */
 .card img {
-  width: 50px;
-  margin-bottom: 10px;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 14px;
+    object-fit: contain;
 }
 
 .card h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: var(--text);
+    font-size: 19px;
+    font-weight: 750;
 }
 
-/* ========================
-   INPUT
-======================== */
+/* ========================================
+   CAMPOS
+======================================== */
+
 .card input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  margin-bottom: 10px;
-  outline: none;
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: var(--surface-secondary);
+    color: var(--text);
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-body.dark .card input {
-  background: #0f172a;
-  border: 1px solid #374151;
-  color: white;
+.card input::placeholder {
+    color: var(--text-secondary);
 }
 
-/* ========================
+.card input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.13);
+}
+
+/* ========================================
    BOTÕES
-======================== */
+======================================== */
+
 .botoes {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 .botoes button {
-  flex: 1;
-  padding: 9px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.2s;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 7px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* botão consultar */
+.botoes button:hover {
+    transform: translateY(-2px);
+}
+
+.botoes button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+}
+
 .botoes button:first-child {
-  background: #2563eb;
-  color: white;
+    background: var(--primary);
+    color: #ffffff;
 }
 
-.botoes button:first-child:hover {
-  background: #1d4ed8;
-}
-
-/* botão último */
 .botoes button:last-child {
-  background: #10b981;
-  color: white;
+    background: var(--accent);
+    color: #052e2b;
 }
 
-.botoes button:last-child:hover {
-  background: #059669;
+.botoes .limpar {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
-/* ========================
-   RESULTADO
-======================== */
+/* ========================================
+   RESULTADOS
+======================================== */
+
 .resultado {
-  font-size: 14px;
-  line-height: 1.5;
+    max-height: 320px;
+    overflow-y: auto;
+    margin-top: 12px;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.6;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
 }
 
-/* ========================
-   NÚMEROS (bolinhas)
-======================== */
+.info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ========================================
+   DEZENAS SORTEADAS
+======================================== */
+
 .numeros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
 }
 
 .numeros span {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #2563eb;
-  color: white;
-  border-radius: 50%;
-  font-weight: bold;
-  font-size: 14px;
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(9, 47, 53, 0.12);
 }
 
-body.dark .numeros span {
-  background: #3b82f6;
-}
-
-/* ========================
+/* ========================================
    TREVOS
-======================== */
+======================================== */
+
 .trevos {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 15px;
 }
 
 .trevos span {
-  background: gold;
-  color: #111;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
+    min-width: 34px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #facc15;
+    color: #422006;
+    font-size: 13px;
+    font-weight: 800;
+    text-align: center;
 }
 
-/* ========================
-   EXTRA
-======================== */
+/* ========================================
+   INFORMAÇÕES EXTRAS
+======================================== */
+
 .extra {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #6b7280;
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
 }
 
-body.dark .extra {
-  color: #9ca3af;
-}
+/* ========================================
+   LOTECA
+======================================== */
 
-/* ========================
-   LOTECA ULTRA COMPACTA (NÍVEL MÁXIMO)
-======================== */
 .loteca-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 12px;
 }
 
-/* cada jogo vira uma linha fina */
 .jogo-card {
-  background: transparent;
-  padding: 2px 0;
-  font-size: 10px;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 8px 5px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
 }
 
-body.dark .jogo-card {
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-/* remove header */
-.jogo-header {
-  display: none;
-}
-
-/* linha única estilo tabela */
 .jogo-times {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 4px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
 }
 
-/* nomes dos times */
 .time {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 10px;
+    overflow: hidden;
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* placar MINÚSCULO */
+.time:last-child {
+    text-align: right;
+}
+
 .placar-badge {
-  background: #16a34a;
-  color: white;
-  padding: 1px 6px;
-  border-radius: 6px;
-  font-size: 10px;
-  font-weight: bold;
-  min-width: 42px;
-  text-align: center;
+    min-width: 48px;
+    padding: 4px 7px;
+    border-radius: 6px;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center;
 }
 
-/* colunas 1 X 2 micro */
 .colunas {
-  display: flex;
-  gap: 2px;
+    display: flex;
+    gap: 3px;
 }
 
 .colunas span {
-  padding: 1px 4px;
-  border-radius: 3px;
-  background: #e5e7eb;
-  font-size: 9px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
 }
 
 .colunas span.ativo {
-  background: #2563eb;
-  color: white;
+    background: var(--accent);
+    color: #052e2b;
 }
 
-/* aguardando */
 .sem-resultado {
-  font-size: 9px;
-  color: #9ca3af;
-  text-align: center;
-}
-/* resultado com scroll */
-.resultado {
-  max-height: 220px;
-  overflow-y: auto;
-  margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    text-align: center;
 }
 
-/* info topo */
-.info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  margin-bottom: 6px;
-}
+/* ========================================
+   LOADING
+======================================== */
 
-/* botão limpar */
-.botoes .limpar {
-  background: #ef4444;
-  color: white;
-}
-
-.botoes .limpar:hover {
-  background: #dc2626;
-}
-
-/* loader */
 .loader {
-  width: 24px;
-  height: 24px;
-  border: 3px solid #ccc;
-  border-top: 3px solid #2563eb;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 10px auto;
+    width: 30px;
+    height: 30px;
+    margin: 18px auto;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   MENSAGENS
+======================================== */
+
+.resultado:empty {
+    display: none;
+}
+
+.resultado .mensagem-erro {
+    padding: 10px;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* ========================================
+   SOBRE
+======================================== */
+
+.about-section {
+    padding: 65px 0;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-section p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+/* ========================================
+   RODAPÉ
+======================================== */
+
+.footer {
+    padding: 35px 0;
+    background: var(--primary-dark);
+    color: #ffffff;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    color: #6ee7b7;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.footer p {
+    color: #d1fae5;
+    font-size: 13px;
+}
+
+.footer span {
+    margin-top: 8px;
+    color: #a7c5bd;
+    font-size: 12px;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+======================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 950px) {
+    #cards-container,
+    .cards-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-highlight {
+        width: 190px;
+        height: 190px;
+    }
+
+    .highlight-circle {
+        width: 145px;
+        height: 145px;
+    }
+
+    .highlight-circle span {
+        font-size: 75px;
+    }
+}
+
+@media (max-width: 650px) {
+    .container {
+        width: min(100% - 30px, 480px);
+    }
+
+    .header-content {
+        min-height: 70px;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .logo-icon {
+        font-size: 29px;
+    }
+
+    .logo-text {
+        font-size: 16px;
+    }
+
+    .logo-text small {
+        font-size: 8px;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 28px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+    }
+
+    .main-nav a {
+        font-size: 12px;
+    }
+
+    .theme-toggle {
+        padding: 9px 11px;
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 65px 0;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+        letter-spacing: -1.5px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero-highlight {
+        display: none;
+    }
+
+    .loterias-section {
+        padding: 55px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 25px;
+    }
+
+    #cards-container,
+    .cards-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .about-section {
+        padding: 50px 0;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .footer {
+        padding: 30px 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
