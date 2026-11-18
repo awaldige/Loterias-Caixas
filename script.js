@@ -643,13 +643,18 @@ function mostrarResultadoPadrao(resultado, dados) {
    EXIBIÇÃO DO RESULTADO
 ========================= */
 
+
 function mostrarResultado(tipo, dados) {
     const resultado = document.getElementById(`resultado-${tipo}`);
 
     if (!resultado) return;
-        if (tipo === "loteca") {
-        console.log("DADOS COMPLETOS DA LOTECA:", dados);
+
+    if (!dados || typeof dados !== "object") {
+        console.error(`Dados inválidos para ${tipo}:`, dados);
+        return;
     }
+
+    console.log(`DADOS COMPLETOS DE ${tipo.toUpperCase()}:`, dados);
 
     resultado.replaceChildren();
 
@@ -673,29 +678,133 @@ function mostrarResultado(tipo, dados) {
             break;
     }
 
+    // ==========================================
+    // TIME DO CORAÇÃO - TIMEMANIA
+    // ==========================================
+
     if (tipo === "timemania") {
+
+        const camposTime = [
+            "nomeTimeCoracao",
+            "nomeTimeCoracaoMesSorte",
+            "timeCoracao",
+            "TimeCoracao",
+            "timeDoCoracao",
+            "nomeTime",
+            "nomeTimeCoracaoSorteio",
+            "timeCoracaoNome",
+            "descricaoTimeCoracao",
+            "nomeTimeCoracaoResultado"
+        ];
+
+        let timeCoracao = null;
+
+        // Procura o nome do time nos campos conhecidos
+        for (const campo of camposTime) {
+            const valor = dados[campo];
+
+            if (typeof valor === "string" && valor.trim()) {
+                timeCoracao = valor.trim();
+                break;
+            }
+
+            if (valor && typeof valor === "object") {
+                timeCoracao =
+                    valor.nome ||
+                    valor.nomeTime ||
+                    valor.descricao ||
+                    valor.time ||
+                    null;
+
+                if (typeof timeCoracao === "string" && timeCoracao.trim()) {
+                    timeCoracao = timeCoracao.trim();
+                    break;
+                }
+
+                timeCoracao = null;
+            }
+        }
+
+        // Procura também em estruturas internas da resposta
+        if (!timeCoracao) {
+            const objetosInternos = [
+                dados.resultado,
+                dados.listaResultado,
+                dados.dados,
+                dados.time,
+                dados.timeCoracao
+            ];
+
+            for (const objeto of objetosInternos) {
+                if (!objeto || typeof objeto !== "object") continue;
+
+                for (const campo of camposTime) {
+                    const valor = objeto[campo];
+
+                    if (typeof valor === "string" && valor.trim()) {
+                        timeCoracao = valor.trim();
+                        break;
+                    }
+
+                    if (valor && typeof valor === "object") {
+                        timeCoracao =
+                            valor.nome ||
+                            valor.nomeTime ||
+                            valor.descricao ||
+                            null;
+
+                        if (typeof timeCoracao === "string" && timeCoracao.trim()) {
+                            timeCoracao = timeCoracao.trim();
+                            break;
+                        }
+
+                        timeCoracao = null;
+                    }
+                }
+
+                if (timeCoracao) break;
+            }
+        }
+
+        console.log("TIME DO CORAÇÃO IDENTIFICADO:", timeCoracao);
+
         adicionarExtra(
             resultado,
-            "Time do coração",
-            dados.nomeTimeCoracao
+            "⚽ Time do Coração",
+            timeCoracao || "Informação não disponibilizada pela Caixa."
         );
     }
 
+    // ==========================================
+    // MÊS DA SORTE - DIA DE SORTE
+    // ==========================================
+
     if (tipo === "diadesorte") {
+        const mesSorte =
+            dados.mesSorte ||
+            dados.nomeMesSorte ||
+            dados.nomeTimeCoracaoMesSorte;
+
         adicionarExtra(
             resultado,
             "Mês da sorte",
-            dados.nomeTimeCoracaoMesSorte ||
-            dados.mesSorte
+            mesSorte || "Informação não disponibilizada pela Caixa."
         );
     }
 
+    // ==========================================
+    // LOCAL DO SORTEIO
+    // ==========================================
 
     const local = [
         dados.localSorteio,
         dados.nomeMunicipioUFSorteio
     ]
-        .filter(valor => valor && valor.trim() && valor.trim() !== ",")
+        .filter(valor =>
+            typeof valor === "string" &&
+            valor.trim() &&
+            valor.trim() !== ","
+        )
         .map(valor => valor.trim())
         .join(" - ");
 
@@ -709,13 +818,18 @@ function mostrarResultado(tipo, dados) {
         );
     }
 
-    const observacao = dados.observacao;
+    // ==========================================
+    // OBSERVAÇÕES
+    // ==========================================
 
-    if (observacao) {
-        adicionarExtra(resultado, "Observação", observacao);
+    if (dados.observacao) {
+        adicionarExtra(
+            resultado,
+            "Observação",
+            dados.observacao
+        );
     }
 }
-
 
 /* =========================
    TECLA ENTER
